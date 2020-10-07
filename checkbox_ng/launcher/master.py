@@ -449,9 +449,13 @@ class RemoteMaster(ReportsStage, MainLoopStage):
                 time.sleep(0.5)
                 while True:
                     res = select.select([sys.stdin], [], [], 0)
+                    _logger.info("master: hugh-4 - res[0] = %s" % res[0])
                     if not res[0]:
                         break
                     # XXX: this assumes that sys.stdin is chunked in lines
+                    _logger.info("master: hugh-5 - res[0][0] = %s" % res[0][0])
+                    _logger.info("master: hugh-6 - type(res[0][0]) = %s" % type(res[0][0]))
+                    _logger.info("master: hugh-7 - res[0][0].readline() = %s" % res[0][0].readline())
                     self.sa.transmit_input(res[0][0].readline())
 
             else:
